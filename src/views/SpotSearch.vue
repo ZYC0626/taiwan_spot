@@ -47,66 +47,80 @@
     <h3 class="mt-5 mb-4">熱門主題</h3>
     <div class="row">
       <div class="col-md-3 col-6 mb-3">
-        <div
-          @click="goToClass('自然風景類')"
-          class="category bg-cover bg-center"
-          :style="{ 'background-image': 'url(' + require('@/assets/images/spot_1.png') + ')' }"
-        >
-          <strong>自然風景類</strong>
+        <div class="category-border">
+          <div
+            @click="goToClass('自然風景類')"
+            class="category bg-cover bg-center"
+            :style="{ 'background-image': 'url(' + require('@/assets/images/spot_1.png') + ')' }"
+          >
+            <strong>自然風景類</strong>
+          </div>
         </div>
       </div>
       <div class="col-md-3 col-6 mb-3">
-        <div
-          @click="goToClass('觀光工廠類')"
-          class="category bg-cover bg-center"
-          :style="{ 'background-image': 'url(' + require('@/assets/images/spot_2.png') + ')' }"
-        >
-          <strong>觀光工廠類</strong>
+        <div class="category-border">
+          <div
+            @click="goToClass('觀光工廠類')"
+            class="category bg-cover bg-center"
+            :style="{ 'background-image': 'url(' + require('@/assets/images/spot_2.png') + ')' }"
+          >
+            <strong>觀光工廠類</strong>
+          </div>
         </div>
       </div>
       <div class="col-md-3 col-6 mb-3">
-        <div
-          @click="goToClass('遊憩類')"
-          class="category bg-cover bg-center"
-          :style="{ 'background-image': 'url(' + require('@/assets/images/spot_3.png') + ')' }"
-        >
-          <strong>遊憩類</strong>
+        <div class="category-border">
+          <div
+            @click="goToClass('遊憩類')"
+            class="category bg-cover bg-center"
+            :style="{ 'background-image': 'url(' + require('@/assets/images/spot_3.png') + ')' }"
+          >
+            <strong>遊憩類</strong>
+          </div>
         </div>
       </div>
       <div class="col-md-3 col-6 mb-3">
-        <div
-          @click="goToClass('休閒農業類')"
-          class="category bg-cover bg-center"
-          :style="{ 'background-image': 'url(' + require('@/assets/images/spot_4.png') + ')' }"
-        >
-          <strong>休閒農業類</strong>
+        <div class="category-border">
+          <div
+            @click="goToClass('休閒農業類')"
+            class="category bg-cover bg-center"
+            :style="{ 'background-image': 'url(' + require('@/assets/images/spot_4.png') + ')' }"
+          >
+            <strong>休閒農業類</strong>
+          </div>
         </div>
       </div>
       <div class="col-md-3 col-6 mb-3">
-        <div
-          @click="goToClass('生態類')"
-          class="category bg-cover bg-center"
-          :style="{ 'background-image': 'url(' + require('@/assets/images/spot_5.png') + ')' }"
-        >
-          <strong>生態類</strong>
+        <div class="category-border">
+          <div
+            @click="goToClass('生態類')"
+            class="category bg-cover bg-center"
+            :style="{ 'background-image': 'url(' + require('@/assets/images/spot_5.png') + ')' }"
+          >
+            <strong>生態類</strong>
+          </div>
         </div>
       </div>
       <div class="col-md-3 col-6 mb-3">
-        <div
-          @click="goToClass('溫泉類')"
-          class="category bg-cover bg-center"
-          :style="{ 'background-image': 'url(' + require('@/assets/images/spot_6.png') + ')' }"
-        >
-          <strong>溫泉類</strong>
+        <div class="category-border">
+          <div
+            @click="goToClass('溫泉類')"
+            class="category bg-cover bg-center"
+            :style="{ 'background-image': 'url(' + require('@/assets/images/spot_6.png') + ')' }"
+          >
+            <strong>溫泉類</strong>
+          </div>
         </div>
       </div>
       <div class="col-md-3 col-6 mb-3">
-        <div
-          @click="goToClass('古蹟類')"
-          class="category bg-cover bg-center"
-          :style="{ 'background-image': 'url(' + require('@/assets/images/spot_7.png') + ')' }"
-        >
-          <strong>古蹟類</strong>
+        <div class="category-border">
+          <div
+            @click="goToClass('古蹟類')"
+            class="category bg-cover bg-center"
+            :style="{ 'background-image': 'url(' + require('@/assets/images/spot_7.png') + ')' }"
+          >
+            <strong>古蹟類</strong>
+          </div>
         </div>
       </div>
     </div>

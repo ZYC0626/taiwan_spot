@@ -5,7 +5,7 @@
         <li class="breadcrumb-item">
           <a href="#" class="text-decoration-none">首頁</a>
         </li>
-        <li class="breadcrumb-item active">節慶活動</li>
+        <li class="breadcrumb-item active">品嚐美食</li>
       </ol>
     </nav>
 
@@ -46,57 +46,69 @@
     <h3 class="mt-5 mb-4">熱門主題</h3>
     <div class="row">
       <div class="col-md-3 col-6 mb-3">
-        <div
-          @click="goToClass('地方特產')"
-          class="category bg-cover bg-center"
-          :style="{ 'background-image': 'url(' + require('@/assets/images/food_1.png') + ')' }"
-        >
-          <strong>地方特產</strong>
+        <div class="category-border">
+          <div
+            @click="goToClass('地方特產')"
+            class="category bg-cover bg-center"
+            :style="{ 'background-image': 'url(' + require('@/assets/images/food_1.png') + ')' }"
+          >
+            <strong>地方特產</strong>
+          </div>
         </div>
       </div>
       <div class="col-md-3 col-6 mb-3">
-        <div
-          @click="goToClass('中式美食')"
-          class="category bg-cover bg-center"
-          :style="{ 'background-image': 'url(' + require('@/assets/images/food_2.png') + ')' }"
-        >
-          <strong>中式美食</strong>
+        <div class="category-border">
+          <div
+            @click="goToClass('中式美食')"
+            class="category bg-cover bg-center"
+            :style="{ 'background-image': 'url(' + require('@/assets/images/food_2.png') + ')' }"
+          >
+            <strong>中式美食</strong>
+          </div>
         </div>
       </div>
       <div class="col-md-3 col-6 mb-3">
-        <div
-          @click="goToClass('甜點冰品')"
-          class="category bg-cover bg-center"
-          :style="{ 'background-image': 'url(' + require('@/assets/images/food_3.png') + ')' }"
-        >
-          <strong>甜點冰品</strong>
+        <div class="category-border">
+          <div
+            @click="goToClass('甜點冰品')"
+            class="category bg-cover bg-center"
+            :style="{ 'background-image': 'url(' + require('@/assets/images/food_3.png') + ')' }"
+          >
+            <strong>甜點冰品</strong>
+          </div>
         </div>
       </div>
       <div class="col-md-3 col-6 mb-3">
-        <div
-          @click="goToClass('異國料理')"
-          class="category bg-cover bg-center"
-          :style="{ 'background-image': 'url(' + require('@/assets/images/food_4.png') + ')' }"
-        >
-          <strong>異國料理</strong>
+        <div class="category-border">
+          <div
+            @click="goToClass('異國料理')"
+            class="category bg-cover bg-center"
+            :style="{ 'background-image': 'url(' + require('@/assets/images/food_4.png') + ')' }"
+          >
+            <strong>異國料理</strong>
+          </div>
         </div>
       </div>
       <div class="col-md-3 col-6 mb-3">
-        <div
-          @click="goToClass('伴手禮')"
-          class="category bg-cover bg-center"
-          :style="{ 'background-image': 'url(' + require('@/assets/images/food_5.png') + ')' }"
-        >
-          <strong>伴手禮</strong>
+        <div class="category-border">
+          <div
+            @click="goToClass('伴手禮')"
+            class="category bg-cover bg-center"
+            :style="{ 'background-image': 'url(' + require('@/assets/images/food_5.png') + ')' }"
+          >
+            <strong>伴手禮</strong>
+          </div>
         </div>
       </div>
       <div class="col-md-3 col-6 mb-3">
-        <div
-          @click="goToClass('素食')"
-          class="category bg-cover bg-center"
-          :style="{ 'background-image': 'url(' + require('@/assets/images/food_6.png') + ')' }"
-        >
-          <strong>素食</strong>
+        <div class="category-border">
+          <div
+            @click="goToClass('素食')"
+            class="category bg-cover bg-center"
+            :style="{ 'background-image': 'url(' + require('@/assets/images/food_6.png') + ')' }"
+          >
+            <strong>素食</strong>
+          </div>
         </div>
       </div>
     </div>

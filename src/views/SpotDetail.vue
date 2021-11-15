@@ -6,7 +6,10 @@
           <a href="#" class="text-decoration-none">首頁</a>
         </li>
         <li class="breadcrumb-item">
-          <a href="#" class="text-decoration-none">探索景點</a>
+          <a href="#" class="text-decoration-none" @click.prevent="breadCrumbSearch('spot', 'all')">探索景點</a>
+        </li>
+        <li class="breadcrumb-item" v-if="currentCity !== ''">
+          <a href="#" class="text-decoration-none" @click.prevent="breadCrumbSearch('spot', currentCity_en)">{{ currentCity }}</a>
         </li>
         <li class="breadcrumb-item active" aria-current="page">
           {{ detailData.Name }}
@@ -56,7 +59,7 @@
           <h3 class="title">周邊資訊:</h3>
           <div class="row">
             <div class="col-md-4 mb-md-0 mb-3">
-              <div class="relation-item">
+              <div class="relation-item" @click="getAroundOne('ScenicSpot','spot')">
                 <img
                   src="@/assets/images/nearby-scene30.svg"
                   alt="scene30"
@@ -66,7 +69,7 @@
               </div>
             </div>
             <div class="col-md-4 mb-md-0 mb-3">
-              <div class="relation-item">
+              <div class="relation-item" @click="getAroundOne('Activity','event')">
                 <img
                   src="@/assets/images/nearby-event30.svg"
                   alt="scene30"
@@ -76,7 +79,7 @@
               </div>
             </div>
             <div class="col-md-4 mb-md-0 mb-3">
-              <div class="relation-item">
+              <div class="relation-item" @click="getAroundOne('Restaurant','food')">
                 <img
                   src="@/assets/images/nearby-food30.svg"
                   alt="scene30"
@@ -92,16 +95,25 @@
 
     <div class="mt-4">
       <div class="d-flex align-items-center">
-        <h2 class="me-auto ms-2">還有這些不能錯過活動</h2>
-        <a class="more-link me-2" href="#"
-          >查看更多活動<img
+        <h2 class="me-auto ms-2 d-md-block d-none">還有這些不能錯過的景點</h2>
+        <h2 class="me-auto ms-2 d-block d-md-none">這些也不能錯過</h2>
+        <a class="more-link me-2 d-md-block d-none" href="#"
+        @click.prevent="goToRelation('spot')"
+          >查看更多{{ this.currentCity }}景點<img
+            src="@/assets/images/arrow-right16_R.svg"
+            class="ms-1"
+            alt="arrow"
+        /></a>
+        <a class="more-link me-2 d-block d-md-none" href="#"
+        @click.prevent="goToRelation('spot')"
+          >更多景點<img
             src="@/assets/images/arrow-right16_R.svg"
             class="ms-1"
             alt="arrow"
         /></a>
       </div>
       <div class="row">
-        <div class="col-3" v-for="item in aroundSpotList" :key="item.ID">
+        <div class="col-lg-3 col-md-6" v-for="item in aroundSpotList" :key="item.ID">
           <div class="recommended-card"  @click="goToDetail('spot', item.ID)">
             <div class="recommended-card-img-border">
               <div
@@ -132,7 +144,9 @@ export default {
       id: '',
       detailData: {},
       iframeSrc: '',
-      aroundSpotList: []
+      aroundSpotList: [],
+      currentCity: '',
+      currentCity_en: ''
     }
   },
   watch: {
@@ -141,6 +155,7 @@ export default {
       if (this.$route.name === 'spotDetail') {
         this.id = this.$route.params.Id
         this.getDetail()
+        this.getCityList()
       }
     }
   },
@@ -159,8 +174,8 @@ export default {
           this.detailData = response.data[0]
           this.iframeSrc = `https://maps.google.com.tw/maps?f=q&hl=zh-TW&geocode=&q=${this.detailData.Position.PositionLat},${this.detailData.Position.PositionLon}&z=16&output=embed&t=`
           this.getAroundSpot()
-          // console.log(this.detailData)
           this.renderCarousel(this.detailData)
+          this.getCityList()
         })
         .catch((err) => {
           console.log(err)
@@ -175,7 +190,7 @@ export default {
         .then((response) => {
           // console.log(response)
           this.aroundSpotList = response.data
-          console.log(this.aroundSpotList)
+          // console.log(this.aroundSpotList)
         })
         .catch((err) => {
           console.log(err)
@@ -195,7 +210,7 @@ export default {
       return re
     },
     renderCarousel (data) {
-      console.log('renderCarousel')
+      // console.log('renderCarousel')
       const imgData = this.checkImage(data)
       let str = ''
       const NavbtnStr = `
@@ -254,6 +269,65 @@ export default {
       str += contentStr
       str += NavbtnStr
       this.$refs.carouselSpot.innerHTML = str
+    },
+    getCityList () {
+      this.axios.get('https://gist.motc.gov.tw/gist_api/V3/Map/Basic/City?$format=JSON',
+        {
+          headers: this.$getAuthorizationHeader()
+        }
+      )
+        .then((response) => {
+          // console.log(response.data)
+          const cityList = response.data
+          this.currentCity = this.detailData.City ? this.detailData.City : this.$filter.formatCity(this.detailData)
+          // console.log(this.currentCity)
+          cityList.forEach((x) => {
+            if (x.CityName === this.currentCity) {
+              this.currentCity_en = x.City
+            }
+          })
+        })
+        .catch((err) => {
+          console.log(err)
+        })
+    },
+    goToRelation (way) {
+      const p = {
+        keyword: '',
+        city: this.currentCity_en === '' ? 'all' : this.currentCity_en,
+        class1: 'all',
+        search: true
+      }
+      const pstr = JSON.stringify(p)
+      this.$router.push(`/${way}Search/${pstr}`)
+    },
+    getAroundOne (way, way2) {
+      this.axios.get(`https://ptx.transportdata.tw/MOTC/v2/Tourism/${way}?$filter=ID%20ne%20'${this.detailData.ID}'&$orderby=UpdateTime%20desc&$top=3&$spatialFilter=nearby(${this.detailData.Position.PositionLat}%2C%20${this.detailData.Position.PositionLon}%2C%201000)&$format=JSON`,
+        {
+          headers: this.$getAuthorizationHeader()
+        }
+      )
+        .then((response) => {
+          // console.log(response)
+          if (response.data) {
+            // 隨機 三選一
+            const ID = response.data[Math.floor(Math.random() * response.data.length)].ID
+            this.$router.push(`/${way2}/${ID}`)
+          }
+        })
+        .catch((err) => {
+          console.log(err)
+        })
+    },
+    breadCrumbSearch (way, City) {
+      const p = {
+        keyword: '',
+        city: City,
+        class1: 'all',
+        search: true
+      }
+      const pstr = JSON.stringify(p)
+      this.$router.push(`/${way}Search/${pstr}`)
     }
   },
   created () {

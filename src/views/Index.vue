@@ -27,7 +27,7 @@
           <div class="mb-2">
             <select class="form-select" v-model="s_category">
               <option value="spot" selected>探索景點</option>
-              <option value="evetn">節慶活動</option>
+              <option value="event">節慶活動</option>
               <option value="food">品嚐美食</option>
             </select>
           </div>
@@ -59,7 +59,7 @@
   <div class="container-fluid conatainer-px mt-4">
     <div class="d-flex align-items-center">
       <h2 class="me-auto ms-2">近期活動</h2>
-      <a class="more-link me-2" href="#"
+      <a class="more-link me-2" href="#"  @click.prevent="goToRelation('event')"
         >查看更多活動<img
           src="@/assets/images/arrow-right16_R.svg"
           class="ms-1"
@@ -108,15 +108,15 @@
   <div class="container-fluid conatainer-px mt-4">
     <div class="d-flex align-items-center">
       <h2 class="me-auto ms-2">熱門打卡景點</h2>
-      <a class="more-link me-2" href="#"
-        >查看更多活動<img
+      <a class="more-link me-2" href="#" @click.prevent="goToRelation('spot')"
+        >查看更多景點<img
           src="@/assets/images/arrow-right16_R.svg"
           class="ms-1"
           alt="arrow"
       /></a>
     </div>
     <div class="row">
-      <div class="col-3" v-for="item in hotSpot" :key="item.ID">
+      <div class="col-lg-3 col-md-6" v-for="item in hotSpot" :key="item.ID">
         <div class="recommended-card" @click="goToDetail('spot',item.ID)">
           <div class="recommended-card-img-border">
             <div
@@ -140,15 +140,15 @@
   <div class="container-fluid conatainer-px mt-4">
     <div class="d-flex align-items-center">
       <h2 class="me-auto ms-2">一再回訪美食</h2>
-      <a class="more-link me-2" href="#"
-        >查看更多活動<img
+      <a class="more-link me-2" href="#" @click.prevent="goToRelation('food')"
+        >查看更多美食<img
           src="@/assets/images/arrow-right16_R.svg"
           class="ms-1"
           alt="arrow"
       /></a>
     </div>
     <div class="row">
-      <div class="col-3" v-for="item in FoodList" :key="item.ID">
+      <div class="col-lg-3 col-md-6" v-for="item in FoodList" :key="item.ID">
         <div class="recommended-card" @click="goToDetail('food',item.ID)">
           <div class="recommended-card-img-border">
             <div
@@ -221,6 +221,16 @@ export default {
     },
     goToDetail (category, id) {
       this.$router.push(`/${category}/${id}`)
+    },
+    goToRelation (way) {
+      const p = {
+        keyword: '',
+        city: this.RandomCity,
+        class1: 'all',
+        search: true
+      }
+      const pstr = JSON.stringify(p)
+      this.$router.push(`/${way}Search/${pstr}`)
     },
     getCarousel () {
       this.axios.get(`https://ptx.transportdata.tw/MOTC/v2/Tourism/ScenicSpot/${this.RandomCity}?$select=ID%2CCity%2CName%2CPicture%2CAddress&$filter=Picture%2FPictureUrl1%20ne%20null&$orderby=UpdateTime%20desc&$top=5&$format=JSON`,

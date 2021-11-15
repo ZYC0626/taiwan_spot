@@ -46,57 +46,69 @@
     <h3 class="mt-5 mb-4">熱門主題</h3>
     <div class="row">
       <div class="col-md-3 col-6 mb-3">
-        <div
-          @click="goToClass('節慶活動')"
-          class="category bg-cover bg-center"
-          :style="{ 'background-image': 'url(' + require('@/assets/images/event_1.png') + ')' }"
-        >
-          <strong>節慶活動</strong>
+        <div class="category-border">
+          <div
+            @click="goToClass('節慶活動')"
+            class="category bg-cover bg-center"
+            :style="{ 'background-image': 'url(' + require('@/assets/images/event_1.png') + ')' }"
+          >
+            <strong>節慶活動</strong>
+          </div>
         </div>
       </div>
       <div class="col-md-3 col-6 mb-3">
-        <div
-          @click="goToClass('自行車活動')"
-          class="category bg-cover bg-center"
-          :style="{ 'background-image': 'url(' + require('@/assets/images/event_2.png') + ')' }"
-        >
-          <strong>自行車活動</strong>
+        <div class="category-border">
+          <div
+            @click="goToClass('自行車活動')"
+            class="category bg-cover bg-center"
+            :style="{ 'background-image': 'url(' + require('@/assets/images/event_2.png') + ')' }"
+          >
+            <strong>自行車活動</strong>
+          </div>
         </div>
       </div>
       <div class="col-md-3 col-6 mb-3">
-        <div
-          @click="goToClass('遊憩活動')"
-          class="category bg-cover bg-center"
-          :style="{ 'background-image': 'url(' + require('@/assets/images/event_3.png') + ')' }"
-        >
-          <strong>遊憩活動</strong>
+        <div class="category-border">
+          <div
+            @click="goToClass('遊憩活動')"
+            class="category bg-cover bg-center"
+            :style="{ 'background-image': 'url(' + require('@/assets/images/event_3.png') + ')' }"
+          >
+            <strong>遊憩活動</strong>
+          </div>
         </div>
       </div>
       <div class="col-md-3 col-6 mb-3">
-        <div
-          @click="goToClass('產業文化活動')"
-          class="category bg-cover bg-center"
-          :style="{ 'background-image': 'url(' + require('@/assets/images/event_4.png') + ')' }"
-        >
-          <strong>產業文化活動</strong>
+        <div class="category-border">
+          <div
+            @click="goToClass('產業文化活動')"
+            class="category bg-cover bg-center"
+            :style="{ 'background-image': 'url(' + require('@/assets/images/event_4.png') + ')' }"
+          >
+            <strong>產業文化活動</strong>
+          </div>
         </div>
       </div>
       <div class="col-md-3 col-6 mb-3">
-        <div
-          @click="goToClass('年度活動')"
-          class="category bg-cover bg-center"
-          :style="{ 'background-image': 'url(' + require('@/assets/images/event_5.png') + ')' }"
-        >
-          <strong>年度活動</strong>
+        <div class="category-border">
+          <div
+            @click="goToClass('年度活動')"
+            class="category bg-cover bg-center"
+            :style="{ 'background-image': 'url(' + require('@/assets/images/event_5.png') + ')' }"
+          >
+            <strong>年度活動</strong>
+          </div>
         </div>
       </div>
       <div class="col-md-3 col-6 mb-3">
-        <div
-          @click="goToClass('四季活動')"
-          class="category bg-cover bg-center"
-          :style="{ 'background-image': 'url(' + require('@/assets/images/event_6.png') + ')' }"
-        >
-          <strong>四季活動</strong>
+        <div class="category-border">
+          <div
+            @click="goToClass('四季活動')"
+            class="category bg-cover bg-center"
+            :style="{ 'background-image': 'url(' + require('@/assets/images/event_6.png') + ')' }"
+          >
+            <strong>四季活動</strong>
+          </div>
         </div>
       </div>
     </div>
