@@ -207,9 +207,6 @@ export default {
           console.log(err)
         })
     },
-    getCategory () {
-      // console.log('getCategory')
-    },
     goToClass (cl) {
       const para = {
         keyword: '',
@@ -262,12 +259,47 @@ export default {
             current_page: page,
             has_next: page < totalPage,
             has_pre: page !== 1,
-            total_pages: totalPage
+            total_pages: totalPage,
+            page_range: this.getPageRange(page, totalPage)
           }
         })
         .catch((err) => {
           console.log(err)
         })
+    },
+    getPageRange (currentPage, totalPage) {
+      if (totalPage <= 5) {
+        const pageRanges = Array(totalPage)
+          .fill(1)
+          .map((val, index) => {
+            const value = val + index
+            return value
+          })
+        return pageRanges
+      } else {
+        const startPage = (() => {
+          // if (currentPage - 2 <= 0) return 1 // 前幾頁
+          // const overNumber = currentPage + 2 - totalPage
+          // if (overNumber > 0) return currentPage - 2 - overNumber // 最後幾頁
+          // return currentPage - 2 // 正常頁
+          if (currentPage - 1 <= 0) return 1 // 前幾頁
+          const overNumber = currentPage + 1 - totalPage
+          if (overNumber > 0) return currentPage - 1 - overNumber // 最後幾頁
+          return currentPage - 1 // 正常頁
+        })()
+        const pageRanges = Array(3) // 5
+          .fill(startPage)
+          .map((val, index) => {
+            const value = val + index
+            // return { isActive: value === currentPage, action: 'setPage', value }
+            return value
+          })
+          // .filter(({ value }) => value >= 1 && value <= totalPage)
+        // if (pageRanges[0] !== 1) pageRanges.unshift(1)
+        // if (pageRanges[pageRanges.length - 1] !== totalPage) pageRanges.push(totalPage)
+        // console.log(startPage, pageRanges)
+        return pageRanges
+      }
     }
   },
   watch: {
@@ -280,7 +312,6 @@ export default {
   },
   created () {
     this.getCityList()
-    this.getCategory()
     this.getParams()
   }
 }
