@@ -120,8 +120,8 @@
         <span style="font-family: 'Noto Sans TC', sans-serif;">共有 {{ totalLength }} 筆</span>
       </div>
       <div class="row" v-if="totalLength > 0">
-        <div class="col-xl-3 col-md-6 mb-3" v-for="item in resultData" :key="item.ID">
-          <div class="recommended-card" @click="goToDetail('event',item.ID)">
+        <div class="col-xl-3 col-md-6 mb-3" v-for="item in resultData" :key="item.ActivityID">
+          <div class="recommended-card" @click="goToDetail('event',item.ActivityID)">
             <div class="recommended-card-img-border">
               <div v-if="item.Picture.PictureUrl1"
                 class="recommended-card-img"
@@ -132,7 +132,7 @@
                 :style="{ 'background-image': 'url(' + require('@/assets/images/NoImage-255x200.png') + ')' }"
               ></div>
             </div>
-            <p class="title">{{ item.Name }}</p>
+            <p class="title">{{ item.ActivityName }}</p>
             <p class="spot">
               <img
                 src="@/assets/images/spot16.svg"
@@ -152,7 +152,7 @@
     </template>
 
     <Pagination class="mt-4"
-      v-if="searchTrigger"
+      v-if="searchTrigger && totalLength != 0"
       :pages="pagination"
       v-on:emit-pages="searchByInput"
     ></Pagination>

@@ -122,7 +122,7 @@
                 :style="{ 'background-image': 'url(' + item.Picture.PictureUrl1 + ')' }"
               ></div>
             </div>
-            <p class="title">{{ item.Name }}</p>
+            <p class="title">{{ item.ActivityName }}</p>
             <p class="spot">
               <img
                 src="@/assets/images/spot16.svg"
@@ -162,7 +162,7 @@ export default {
       this.$router.push(`/${category}/${id}`)
     },
     getDetail () {
-      this.axios.get(`https://ptx.transportdata.tw/MOTC/v2/Tourism/Activity?$filter=ID%20eq%20'${this.id}'&$top=1&$format=JSON`,
+      this.axios.get(`https://ptx.transportdata.tw/MOTC/v2/Tourism/Activity?$filter=ActivityID%20eq%20'${this.id}'&$top=1&$format=JSON`,
         {
           headers: this.$getAuthorizationHeader()
         }
@@ -181,7 +181,7 @@ export default {
         })
     },
     getAroundEvent () {
-      this.axios.get(`https://ptx.transportdata.tw/MOTC/v2/Tourism/Activity?$filter=Picture%2FPictureUrl1%20ne%20null%20and%20ID%20ne%20'${this.detailData.ID}'&$orderby=UpdateTime%20desc&$top=4&$spatialFilter=nearby(${this.detailData.Position.PositionLat}%2C%20${this.detailData.Position.PositionLon}%2C%20100000)&$format=JSON`,
+      this.axios.get(`https://ptx.transportdata.tw/MOTC/v2/Tourism/Activity?$filter=Picture%2FPictureUrl1%20ne%20null%20and%20ActivityID%20ne%20'${this.detailData.ID}'&$orderby=UpdateTime%20desc&$top=4&$spatialFilter=nearby(${this.detailData.Position.PositionLat}%2C%20${this.detailData.Position.PositionLon}%2C%20100000)&$format=JSON`,
         {
           headers: this.$getAuthorizationHeader()
         }
@@ -299,16 +299,17 @@ export default {
       this.$router.push(`/${way}Search/${pstr}`)
     },
     getAroundOne (way, way2) {
-      this.axios.get(`https://ptx.transportdata.tw/MOTC/v2/Tourism/${way}?$filter=ID%20ne%20'${this.detailData.ID}'&$orderby=UpdateTime%20desc&$top=3&$spatialFilter=nearby(${this.detailData.Position.PositionLat}%2C%20${this.detailData.Position.PositionLon}%2C%201000)&$format=JSON`,
+      this.axios.get(`https://ptx.transportdata.tw/MOTC/v2/Tourism/${way}?$filter=${way}ID%20ne%20'${this.detailData.ID}'&$orderby=UpdateTime%20desc&$top=3&$spatialFilter=nearby(${this.detailData.Position.PositionLat}%2C%20${this.detailData.Position.PositionLon}%2C%201000)&$format=JSON`,
         {
           headers: this.$getAuthorizationHeader()
         }
       )
         .then((response) => {
-          // console.log(response)
+          console.log(response)
           if (response.data) {
             // 隨機 三選一
-            const ID = response.data[Math.floor(Math.random() * response.data.length)].ID
+            const IDName = `${way}ID`
+            const ID = response.data[Math.floor(Math.random() * response.data.length)][IDName]
             this.$router.push(`/${way2}/${ID}`)
           }
         })

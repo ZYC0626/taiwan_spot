@@ -80,7 +80,7 @@
               <div class="info-card-content d-flex flex-column">
                 <p class="time">{{ $filter.formatDate(item.StartTime ) }} - {{ $filter.formatDate(item.EndTime  ) }}</p>
                 <p class="title">
-                  {{ item.Name }}
+                  {{ item.ActivityName }}
                 </p>
                 <div class="d-flex mt-auto">
                   <p class="spot me-auto">
@@ -90,7 +90,7 @@
                       alt="spot"
                     />{{ item.City }}
                   </p>
-                  <a href="#" class="detail" @click.prevent="goToDetail('event',item.ID)"
+                  <a href="#" class="detail" @click.prevent="goToDetail('event',item.ActivityID)"
                     >詳細介紹<img
                       src="@/assets/images/arrow-right16_G.svg"
                       class="me-1"
@@ -117,14 +117,14 @@
     </div>
     <div class="row">
       <div class="col-lg-3 col-md-6" v-for="item in hotSpot" :key="item.ID">
-        <div class="recommended-card" @click="goToDetail('spot',item.ID)">
+        <div class="recommended-card" @click="goToDetail('spot',item.ScenicSpotID)">
           <div class="recommended-card-img-border">
             <div
               class="recommended-card-img"
               :style="{ 'background-image': 'url(' + item.Picture.PictureUrl1 + ')' }"
             ></div>
           </div>
-          <p class="title">{{ item.Name }}</p>
+          <p class="title">{{ item.ScenicSpotName }}</p>
           <p class="spot">
             <img
               src="@/assets/images/spot16.svg"
@@ -149,14 +149,14 @@
     </div>
     <div class="row">
       <div class="col-lg-3 col-md-6" v-for="item in FoodList" :key="item.ID">
-        <div class="recommended-card" @click="goToDetail('food',item.ID)">
+        <div class="recommended-card" @click="goToDetail('food',item.RestaurantID)">
           <div class="recommended-card-img-border">
             <div
               class="recommended-card-img"
               :style="{ 'background-image': 'url(' + item.Picture.PictureUrl1 + ')' }"
             ></div>
           </div>
-          <p class="title">{{ item.Name }}</p>
+          <p class="title">{{ item.RestaurantName }}</p>
           <p class="spot">
             <img
               src="@/assets/images/spot16.svg"
@@ -233,7 +233,7 @@ export default {
       this.$router.push(`/${way}Search/${pstr}`)
     },
     getCarousel () {
-      this.axios.get(`https://ptx.transportdata.tw/MOTC/v2/Tourism/ScenicSpot/${this.RandomCity}?$select=ID%2CCity%2CName%2CPicture%2CAddress&$filter=Picture%2FPictureUrl1%20ne%20null&$orderby=UpdateTime%20desc&$top=5&$format=JSON`,
+      this.axios.get(`https://ptx.transportdata.tw/MOTC/v2/Tourism/ScenicSpot/${this.RandomCity}?$select=ScenicSpotID%2CCity%2CScenicSpotName%2CPicture%2CAddress&$filter=Picture%2FPictureUrl1%20ne%20null&$orderby=UpdateTime%20desc&$top=5&$format=JSON`,
         {
           headers: this.$getAuthorizationHeader()
         }
@@ -359,7 +359,7 @@ export default {
             background-image: url(${x.Picture.PictureUrl1});
           "
         >
-        <div class="carousel-caption"><p><strong>${city}</strong> | <strong>${x.Name}</strong></p></div>
+        <div class="carousel-caption"><p><strong>${city}</strong> | <strong>${x.ScenicSpotName}</strong></p></div>
         </div>`
       })
       contentStr += '</div>'
